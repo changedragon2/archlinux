@@ -1,5 +1,12 @@
 #!/bin/sh
 
+log_dir="$HOME/repository/archlinux/log"
+cd $log_dir 2>/dev/null
+if [ "$?" != "0" ]; then
+    echo "directory $log_dir not exist"
+    exit 1
+fi
+
 # get date
 date=$(date +'%F')
 year=$(date +'%Y')
