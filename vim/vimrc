@@ -1,0 +1,260 @@
+" plugin
+filetyp plugin indent on
+    " use pathogen to manager plugin
+    execute pathogen#infect()
+    "call pathogen#infect()
+	
+    "autocmd VimEnter * NERDTree  " enable plugin NERDTree
+	
+	" colorscheme
+	" if colorscheme == 'solarized' and in terminal
+	let g:solarized_termcolors=256
+	"let g:solarized_termtrans=70
+	"let g:solarized_bold=0
+	
+    " /*ale
+    "let g:ale_linters_explicit=1 " only run linters named in ale_linters settings
+    let g:ale_warn_about_trailing_whitespace=0 " disable whitespace warnings
+    "let g:ale_virtualtext_cursor='current' " show victual text on current cursor or use 'disabled'
+	
+	" error and wraning tag
+    let g:ale_sign_error='>>'
+    let g:ale_sign_warning='--'
+
+    let g:ale_sign_column_always=1		" open the sign gutter always
+    "let g:ale_set_highlights=0			" disable highlighting
+	
+	let g:ale_lint_on_enter=0			" do not run linters when open a file
+	" only run linters when save a file
+	let g:ale_lint_on_text_changed='never'
+	let g:ale_linton_insert_leave=0
+	"let g:ale_lint_on_save=0			" do not run linters when save a file
+	
+	" use quickfix list instead of loclist
+	"let g:ale_set_loclist=0
+	"let g:ale_set_quickfix=1
+	" show vim window for quickfix or loclist
+	let g:ale_open_list=1
+	" keep window open even after errors disappear
+	let g:ale_keep_list_window_open=1
+	" open window vertically instead of the default horizontally
+	let g:ale_keep_list_vertical=1
+    " ale*/
+	
+	" /*airline -- status bar
+	" enable tabline
+	let g:airline#extensions#tabline#enabled=1
+	" set separators for tabline
+	let g:airline#extensions#tabline#left_sep='<-'
+	let g:airline#extensions#tabline#left_alt_sep='>'
+	" which path formatter airline use
+	let g:airline#extensions#tabline#formatter='default'
+	" enable statusline on top
+	"let g:airline_statusline_ontop=1
+	" airline theme
+	"let g:airline_theme=''
+	"let g:airline_powerline_fonts=1
+	
+	"  statusline section color
+	"function! AccentDemo()
+	"    let keys = ['a','b','c','d','e','f','g','h']
+	"	for k in keys
+	"		call airline#parts#define_text(k, k)
+	"	endfor
+	"	call airline#parts#define_accent('a', 'red')
+	"	call airline#parts#define_accent('b', 'green')
+	"	call airline#parts#define_accent('c', 'blue')
+	"	call airline#parts#define_accent('d', 'yellow')
+	"	call airline#parts#define_accent('e', 'orange')
+	"	call airline#parts#define_accent('f', 'purple')
+	"	call airline#parts#define_accent('g', 'bold')
+	"	call airline#parts#define_accent('h', 'italic')
+	"	let g:airline_section_a = airline#section#create(keys)
+	"endfunction
+	"autocmd VimEnter * call AccentDemo()
+
+
+	" airline*/
+
+" enable fcitx5
+"let fcitx5state=system("fcitx5-remote")
+" 退出插入模式时禁用输入法，并保存状态
+"autocmd InsertLeave * :silent let fcitx5state=system("fcitx5-remote")[0] | silent !fcitx5-remote -c
+" 2 表示之前状态打开了输入法，则进入插入模式时启动输入法
+"autocmd InsertEnter * :silent if fcitx5state == 2 | call system("fcitx5-remote -o") | endif
+
+" encoding
+set encoding=utf-8
+set fileencoding=utf-8
+
+" syntax
+syntax enable
+filetype on
+filetype indent on
+filetype plugin on
+set title
+set cursorline
+set cursorcolumn
+set number
+set autowrite
+set autoindent
+set cindent
+set smartindent
+set showmatch
+set scrolloff=3
+set laststatus=2 " show status on bottom
+" set spell spelllang=en_us 
+set autochdir
+set relativenumber
+set showmode
+set showcmd
+set cmdheight=1
+set ruler
+set wildmenu  " enable tab completion
+
+set hidden
+set wrap
+set autoindent
+set cindent
+"set ruler
+set noeb " remove wrong bell
+set confirm " confirm while edit non-saved or read-only file
+
+" enable clipboard
+vnoremap <Leader>y "+y
+nmap <Leader>p "+p
+
+" colors
+set t_Co=256
+set colorcolumn=120
+highlight ColorColumn ctermbg=233
+"set background=dark
+" 取消注释以使用配色
+"colorscheme solarized  
+"colorscheme Tomorrow-Night-Bright
+"color
+
+" tabs and spaces
+set tabstop=4
+set softtabstop=-1
+set shiftwidth=4
+set shiftround
+" set noexpandtab
+set expandtab   " 用空格代替tab
+set smarttab
+
+" search
+set ignorecase
+set hlsearch
+set incsearch
+set smartcase
+set history=1000
+set undolevels=1000
+set wrapscan
+
+" stuff
+set backspace=indent,eol,start
+"set ffs=unix,dos,mac
+set textwidth=135
+
+" disable stupid backup and swap files - they trigger too many events for file system watchers
+set nobackup
+set nowritebackup
+set noswapfile
+
+" set multiwindow
+map spl :set splitright<CR>:vsplit<CR>			" split windw right
+map sph :set nosplitright<CR>:vsplit<CR>		" split window left
+map spj :set splitbelow<CR>:split<CR>			" split window up
+map spk :set nosplitbelow<CR>:split<CR>			" split window down
+" move between multiwindow
+"map <A-h> <C-w>h
+"map <A-j> <C-w>j
+"map <A-k> <C-w>k
+"map <A-l> <C-w>l
+map mh <C-w>h			" move to left window
+map ml <C-w>l			" move to right window
+map mj <C-w>j			" move to bottom window
+map mk <C-w>k			" move to top window
+" resize window
+map <A-=> :vertical resize+5 <CR>
+map <A--> :vertical resize-5 <CR>
+map <A-+> :resize+5 <CR>
+map <A-_> :resize-5 <CR>
+" transposition window
+map sv <C-w>t<c-W>H
+map sv <C-w>t<c-W>K
+
+" add and delete tab
+map te :tabe<CR>		" edit a tab
+map tc :tabc<CR>		" close a tab
+map tp :tabp<CR>		" go to previous tab
+map tn :tabn<CR>		" go to next tab
+map tmp :-tabmove<CR>
+map tmn :+tabmove<CR>
+map to	:tabo<CR>		" only one tab
+map tf	:tabfir<CR>		" go to first tab
+map tl	:tabl<CR>		" go to last tab
+
+
+
+set iskeyword+=_,$,@,%,#,-
+
+" uncomment to enable tab"
+" inoremap [ []<Esc>i "
+
+set foldmethod=indent
+
+autocmd BufNewFile *.cpp,*.c,*.html,*.sh,*.py exec ":call SetTitle()"
+let $author_name = "changedragon2"
+function SetTitle()
+    if &filetype == 'cpp'
+		call append(0, "/*---------------------------------------------------------------------")
+		call append(1, "	      File   Name : ".expand("%"))
+		call append(2, "		 Author   : ".$author_name)
+		call append(3, "	      Creeat Time : ".strftime("%c"))
+		call append(4, "---------------------------------------------------------------------*/")
+		call append(5, "#include <iostream>")
+		call append(7, "")
+		call append(6, "#include <stdlib.h>")
+		call append(8, "using namespace std;")
+    endif
+    if &filetype == 'c'
+		call append(0, "/*---------------------------------------------------------------------")
+		call append(1, "          File   Name : ".expand("%"))
+		call append(2, "             Author   : ".$author_name)
+		call append(3, "          Creeat Time : ".strftime("%c"))
+		call append(4, "---------------------------------------------------------------------*/")
+		call append(5, "#include <stdio.h>")
+		call append(6, "#include <stdlib.h>")
+    endif
+    if &filetype == 'html'
+		call append(0, "<!---------------------------------------------------------------------")
+		call append(1, "          File   Name : ".expand("%"))
+		call append(2, "             Author   : ".$author_name)
+		call append(3, "          Creeat Time : ".strftime("%c"))
+		call append(4, "---------------------------------------------------------------------->")
+		call append(5, "<!DOCTYPE html>")
+		call append(6, "<html>")
+		call append(7, "  <head>")
+        call append(8, "    <meta charset=\"utf-8\" />") 
+        call append(9, "    <meta name=\"author\" content=\"changedragon2\" />")
+        call append(10, "    <meta name=\"keywords\" content=\"\" />")
+		call append(11, "    <title></title>")
+		call append(12, "  </head>")
+		call append(13, "  <body>")
+		call append(14, "	 ")
+		call append(15, "  </body>")
+		call append(16, "</html>")
+    endif
+    if &filetype == 'sh'
+		call append(0, "#!/bin/sh")
+    endif
+	if &filetype == 'py'
+		call append(0, "/*---------------------------------------------------------------------")
+    	call append(1, "	      File   Name : ".expand("%"))
+		call append(2, "			 Author   : ".$author_name)
+		call append(3, "	      Creeat Time : ".strftime("%c"))
+		call append(4, "---------------------------------------------------------------------*/")
+	endif
+endfunction
