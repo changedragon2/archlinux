@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# get date
+date=$(date +'%F')
+year=$(date +'%Y')
+month=$(date +'%m')
+day=$(date +'%d')
+
+# make directory by time
+# year month day
+mkdir $year 2>/dev/null
+cd $year
+mkdir $month 2>/dev/null
+cd $month
+
+vim ${date}.txt
+exit 0
