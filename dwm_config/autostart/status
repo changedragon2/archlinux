@@ -12,7 +12,7 @@ cpu() {
 
 battery() {
   bat_capacity="$(cat /sys/class/power_supply/BAT*/capacity)"
-    if [ $bat_capacity -eq 100 ]; then
+    if [ $bat_capacity -ge 80 ]; then
         printf "^c$blue^    $bat_capacity%%"
     elif [ $bat_capacity -lt 80 ] && [ $bat_capacity -ge 50 ]; then
         printf "^c$blue^    $bat_capacity%%"
@@ -49,6 +49,26 @@ wlan() {
 	esac
 }
 
+bluetooth() {
+    # bluetooth device mac_addr used to recognized dev
+    dev1="3C:B2:33:E5:F5:EE"    # HUAWEI FreeBuds 5i
+    blue_state=$(bluetoothctl show|grep Powered|awk -F '[:]' '{print $2}')
+    #blue_state=$(bluetooth|awk '{print $3}')
+    if [ "$blue_state" = " yes" ]; then
+        blue_font=""
+        blue_dev=$(bluetoothctl devices Connected|awk '{print $2}')
+        case "$blue_dev" in
+            "$dev1" )
+               blue_font="󰗾" ;;
+            * )
+                ;;
+        esac
+        printf "^c$red^ $blue_font "
+    else
+        printf ""
+    fi
+}
+
 clock() {
     hour=$(date +'%H')
     if [ $hour -gt 6 ] && [ $hour -lt 18 ]; then
@@ -61,6 +81,6 @@ clock() {
 
 while true
 do
-    xsetroot -name " ✗ $(battery) $(brightness) $(wlan) $(cpu) $(mem) $(clock)"
+    xsetroot -name " ✗ $(battery) $(brightness) $(wlan) $(bluetooth) $(cpu) $(mem) $(clock)"
     sleep 1
 done
