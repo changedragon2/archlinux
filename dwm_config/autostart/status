@@ -37,8 +37,12 @@ volume() {
     # vol status 󰕾 󰝟
     left_vol=$(amixer get Master|grep 'Front Left:'|awk '{print $4}')
     max_vol=$(amixer get Master|grep 'Limits'|awk '{print $5}')
-    vol_rate=$((left_vol*100 / max_vol))
-    if [ "$left_vol" = "0" ]; then
+    vol_rate=$(((left_vol*100 + 50) / max_vol))
+
+    # mute or not
+    state=$(amixer get Master|grep 'Front Left:'|awk '{print $6}')
+
+    if [ "$state" = "[off]" ]; then
         printf "^c$green^ 󰝟 "
     else
         printf "^c$green^ 󰕾 "
