@@ -1,0 +1,23 @@
+#!/bin/sh
+
+###	This script is used to sync daily file in different linux release
+
+# print help information
+print_help(){
+    printf "NAME\n    syncfile - used to synchronize files in two directory\n"
+    printf "SYNOPSIS\n    syncfile [option] orignal_dir target_dir\n"
+    printf "OPTION\n    -h, --help\n        print this message\n"
+}
+
+case "$1" in
+    -h | --help | "" )
+        print_help; exit 0
+        ;;
+    * )
+        echo sorry, "$1" not recognized; exit 1
+        ;;
+esac
+
+
+# check difference in directories
+

@@ -1,0 +1,2 @@
+安装截屏工具maim（改进的scrot）
+剪切板 xclip(命令行) xorg-xclipboard(剪切板管理)
