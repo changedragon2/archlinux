@@ -111,8 +111,9 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static const Layout layouts[] = {
     /* symbol     arrange function */
     { "[]=",      tile },    /* first entry is default */
-    { "[M]",      monocle },
+    { "[M]",      monocle },    /* 窗口重叠 */
     { "[@]",      spiral },
+    { "><>",      NULL },    /* no layout function means floating behavior */
     { "[\\]",     dwindle },
     { "H[]",      deck },
     { "TTT",      bstack },
@@ -123,7 +124,6 @@ static const Layout layouts[] = {
     { ":::",      gaplessgrid },
     { "|M|",      centeredmaster },
     { ">M>",      centeredfloatingmaster },
-    { "><>",      NULL },    /* no layout function means floating behavior */
     { NULL,       NULL },
 };
 
@@ -164,12 +164,12 @@ static const Key keys[] = {
         SHCMD("maim $HOME/Pictures/Screenshots/$(date '+%Y-%m-%d-%H:%M:%S').png")},
 
     { MODKEY,                           XK_c,       spawn,          SHCMD("rofi -show drun") },
-    { MODKEY,                           XK_Return,  spawn,            SHCMD("st")},
+    { MODKEY,                           XK_Return,  spawn,            SHCMD("alacritty")},
 
     // toggle stuff
     { MODKEY,                           XK_b,       togglebar,      {0} },          // 状态栏
     { MODKEY|ControlMask,               XK_t,       togglegaps,     {0} },          // 窗口间隔 
-    { MODKEY|ShiftMask,                 XK_space,   togglefloating, {0} },          // 窗口浮动
+    { MODKEY|ShiftMask,                 XK_space,   togglefloating, {0} },          // 单个窗口浮动
     { MODKEY,                           XK_f,       togglefullscr,  {0} },          // 全屏
 
     { MODKEY|ControlMask,               XK_w,       tabmode,        { -1 } },       // 
@@ -223,9 +223,10 @@ static const Key keys[] = {
     { MODKEY,                           XK_t,       setlayout,      {.v = &layouts[0]} },
     { MODKEY|ShiftMask,                 XK_f,       setlayout,      {.v = &layouts[1]} },
     { MODKEY,                           XK_m,       setlayout,      {.v = &layouts[2]} },
+    { MODKEY,                           XK_n,       setlayout,      {.v = &layouts[3]} },
     { MODKEY|ControlMask,               XK_g,       setlayout,      {.v = &layouts[10]} },
     { MODKEY|ControlMask|ShiftMask,     XK_t,       setlayout,      {.v = &layouts[13]} },
-    { MODKEY,                           XK_space,   setlayout,      {0} },
+    { MODKEY,                           XK_space,   setlayout,      {0} },          // 切换到上一次的排列方式
     { MODKEY|ControlMask,               XK_comma,   cyclelayout,    {.i = -1 } },
     { MODKEY|ControlMask,               XK_period,  cyclelayout,    {.i = +1 } },
     { MODKEY,                           XK_0,       view,           {.ui = ~0 } },
@@ -241,7 +242,7 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,                 XK_w,       setborderpx,    {.i = default_border } },
 
     // kill dwm
-    { MODKEY|ControlMask,               XK_q,       spawn,        SHCMD("killall bar.sh dwm") },
+    { MODKEY|ControlMask,               XK_q,       spawn,        SHCMD("killall status dwm") },
 
     // kill window
     { MODKEY|ShiftMask,                 XK_q,       killclient,     {0} },
@@ -259,9 +260,9 @@ static const Key keys[] = {
     TAGKEYS(                            XK_4,                       3)
     TAGKEYS(                            XK_5,                       4)
     TAGKEYS(                            XK_6,                       5)
-    TAGKEYS(                            XK_7,                       6)
-    TAGKEYS(                            XK_8,                       7)
-    TAGKEYS(                            XK_9,                       8)
+    //TAGKEYS(                            XK_7,                       6)
+    //TAGKEYS(                            XK_8,                       7)
+    //TAGKEYS(                            XK_9,                       8)
 };
 
 /* button definitions */
@@ -271,7 +272,7 @@ static const Button buttons[] = {
     { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
     { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
     { ClkWinTitle,          0,              Button2,        zoom,           {0} },
-    { ClkStatusText,        0,              Button2,        spawn,          SHCMD("st") },
+    { ClkStatusText,        0,              Button2,        spawn,          SHCMD("alacritty") },
 
     /* Keep movemouse? */
     /* { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} }, */

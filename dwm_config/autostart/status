@@ -10,6 +10,15 @@ cpu() {
   printf "$cpu_val"
 }
 
+mem() {
+  printf "^c$blue^^b$black^  "
+  printf "^c$blue^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
+}
+
+disk() {
+    echo
+}
+
 battery() {
   bat_capacity="$(cat /sys/class/power_supply/BAT*/capacity)"
     if [ $bat_capacity -ge 80 ]; then
@@ -33,6 +42,17 @@ brightness() {
     printf "^c$red^ $rate%% "
 }
 
+temperature() {
+    temp=$(tlp-stat -t|grep temp|awk '{print $4}')
+    printf "^c$red^ 󱌥 "
+    printf "^c$red^ $temp°C "
+}
+
+weather() {
+    # weather font  󰖗   
+    echo
+}
+
 volume() {
     # vol status 󰕾 󰝟
     left_vol=$(amixer get Master|grep 'Front Left:'|awk '{print $4}')
@@ -48,11 +68,6 @@ volume() {
         printf "^c$green^ 󰕾 "
         printf "^c$green^ $vol_rate%% "
     fi
-}
-
-mem() {
-  printf "^c$blue^^b$black^  "
-  printf "^c$blue^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
 }
 
 wlan() {
