@@ -31,7 +31,7 @@ vim.opt.cursorcolumn = true 	-- show show vertical ruler / 显示垂直标尺
 vim.opt.splitbelow = true		-- open new vertical split bellow / 垂直方向打开窗口（水平分割）
 vim.opt.splitright = true		-- open new horizontal split right / 水平方向打开窗口（垂直分割）
 vim.opt.showmatch = true		-- highlight matching parenthesis
---vim.opt.termguicolors = true	-- enable 24-bit rgb colors
+vim.opt.termguicolors = true	-- enable 24-bit rgb colors
 vim.opt.laststatus = 3			-- set global statusline
 vim.opt.foldmethod = 'indent'	-- enable folding (default 'foldmarker') / 代码折叠（手动）
 -- search

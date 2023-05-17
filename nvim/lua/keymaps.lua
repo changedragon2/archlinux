@@ -4,6 +4,8 @@ local opts = {
 	silent = true,
 }
 
+vim.keymap.set("n", "[c", ":LspStart<CR>", opts)
+
 -- ####### Normal Mode #########--
 
 -- Hint: see `:h vim.map.set()`
