@@ -65,3 +65,15 @@ vim.opt.timeoutlen = 400
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line 到每一行边界允许换行
 vim.opt.whichwrap:append "<>[]hl"
+
+--vim.api.nvim_create_autocmd(
+--    {"BufNewFile"},
+--    {
+--        pattern = {"*.cpp", "*.c", "*.html", "*.sh", "*.py"},
+--	    callback = function()
+--            if vim.bo.filetype == "cpp" then
+--	        vim.notify("fail")
+--            end
+--	    end,
+--    }
+--)

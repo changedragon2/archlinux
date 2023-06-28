@@ -19,3 +19,6 @@ end
 dofile(vim.g.base46_cache .. "defaults")
 vim.opt.rtp:prepend(lazypath)
 require "plugins"
+
+-- transparent bg
+vim.api.nvim_set_hl(0, "Normal", {guibg=NONE, ctermbg=NONE})

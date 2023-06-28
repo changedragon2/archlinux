@@ -50,3 +50,6 @@ vim.keymap.set("n", "to", ":tabonly<CR>", opts)
 -- Hint: start visual mode with the same area as the previous area and the same mode
 vim.keymap.set("v", "<", "<gv<CR>", opts)
 vim.keymap.set("v", ">", ">gv<CR>", opts)
+
+-- transparent enabled
+vim.keymap.set("n", "<C-p>", ":TransparentEnable<CR>", opts)
