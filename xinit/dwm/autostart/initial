@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# update user-dirs
+xdg-user-dirs-update
+
+# enable num lock
+numlockx
+
+# enable mouse tap
+xinput set-prop 11 357 1
+#xinput set-prop 15 359 1
+
+# set background
+#feh --bg-fill $HOME/.local/share/backgrounds/2023-01-08-09-00-00-alluring-sunset-anime-scenery-r2gmgtcp8h9iwo9u.png
+feh --bg-fill $HOME/Pictures/backgrounds/IMG_2846.png
+
+# no wrong bell
+xset b off
+
+# enable picom
+picom -b --config $HOME/.config/picom/picom.conf &
+
+# status bar
+~/.xinit/dwm/autostart/status &
+
+#export GTK_IM_MODULE=fcitx
+#export QT_IM_MODULE=fcitx
+#export XMODIFIERS="@im=fcitx"
+# enable input methods
+#exec fcitx5 -d &
