@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# update user-dirs
+xdg-user-dirs-update
+
+# enable num lock
+numlockx
+
+# enable mouse tap
+xinput set-prop 11 357 1
+#xinput set-prop 15 359 1
+
+# set background
+#feh --bg-fill $HOME/Pictures/backgrounds/gosch.png
+
+# no wrong bell
+xset b off
+
+# enable picom
+picom -b --config $HOME/.config/awesome/picom.conf &
+
+# status bar
